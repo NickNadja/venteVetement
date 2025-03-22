@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{layout :: layout}">
+    <div th:fragment="content">
+        <div class="container">
+            <div class="product-card" th:each="product : ${products}">
+                <div class="head">
+                    <h2 class="title" th:text="${product.productName}"></h2>
+                    <span>
+                        <h3 class="dispo" th:text="${'Stock: ' + product.stock}"></h3>
+                    </span>
+                </div>
+                <img th:src="${product.image}" alt="vetement" class="product-image" />
+
+                <form th:action="@{/add-to-cart}" method="post">
+                    <input type="hidden" name="productId" th:value="${product.id}">
+                    <div>
+                        <div class="foot">
+                            <div class="icons">
+                                <p th:text="${'Taille: ' + product.size}"></p>
+                                <p th:text="${'Couleur: ' + product.color}"></p>
+                                <input type="number" name="quantity" min="1" 
+                                       th:max="${product.stock}" value="1" class="qte">
+                            </div>
+                            <p class="price" th:text="${product.price + ' Ar'}"></p>
+                        </div>
+                        <button type="submit" 
+                                th:disabled="${product.stock == 0}">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</html>

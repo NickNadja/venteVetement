@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{admin/admin-layout :: adminLayout}">
+<head>
+    <title>Tableau de Bord Admin</title>
+</head>
+<body>
+    <div th:fragment="content">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="h3"><i class="bi bi-gear-fill me-2"></i>Tableau de Bord Admin</h1>
+                <p class="text-muted">Bienvenue dans l'espace d'administration. Gérez vos clients, vêtements et achats depuis ici.</p>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Carte pour la gestion des clients -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="bi bi-people-fill display-4 text-primary mb-3"></i>
+                        <h5 class="card-title">Gérer les Clients</h5>
+                        <p class="card-text">Voir, ajouter, modifier ou supprimer des clients.</p>
+                        <a href="/admin/customers" class="btn btn-primary">Aller aux Clients</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Carte pour la gestion des vêtements -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="bi bi-box-seam display-4 text-success mb-3"></i>
+                        <h5 class="card-title">Gérer les Vêtements</h5>
+                        <p class="card-text">Ajouter, modifier ou supprimer des vêtements.</p>
+                        <a href="/admin/products" class="btn btn-success">Aller aux Vêtements</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Carte pour la gestion des achats -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="bi bi-cart-check-fill display-4 text-warning mb-3"></i>
+                        <h5 class="card-title">Gérer les Achats</h5>
+                        <p class="card-text">Voir et gérer les achats effectués par les clients.</p>
+                        <a href="/admin/purchases" class="btn btn-warning">Aller aux Achats</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

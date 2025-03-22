@@ -1,0 +1,185 @@
+/* Styles existants inchangés sauf pour .card-container et ajout de .cart-icon */
+.navbar {
+    background-color: darkslategray;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.card-container {
+    margin-right: 50px;
+    display: flex;
+    align-items: center;
+}
+
+/* Nouveau style pour l'icône du panier */
+.cart-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px; /* Taille du cercle */
+    height: 50px;
+    background-color: #e67e22; /* Une couleur orange chaleureuse, modifiable selon vos goûts */
+    border-radius: 50%; /* Forme circulaire */
+    cursor: pointer; /* Indique que c'est cliquable */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Animation fluide */
+}
+
+.cart-icon:hover {
+    background-color: #d35400; /* Couleur plus foncée au survol */
+    transform: scale(1.1); /* Légère augmentation de taille */
+}
+
+.cart-icon i {
+    font-size: 24px; /* Taille de l'icône */
+    color: #fff; /* Couleur blanche pour contraste */
+}
+
+/* Style pour le compteur du panier */
+.cart-count {
+    position: absolute;
+    top: -5px; /* Position au-dessus du cercle */
+    right: -5px;
+    background-color: #c0392b; /* Rouge pour attirer l'attention */
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Styles existants pour le reste (non modifiés) */
+.navbar .title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #fff;
+    padding: 5px;
+    position: relative; /* Ajouté pour positionner les résultats de recherche */
+}
+
+.search-bar input {
+    color: #fff;
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 16px;
+    width: 200px;
+    background: transparent;
+}
+
+.search-bar i {
+    color: #fff;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/* Styles pour les résultats de recherche */
+.search-results {
+    position: absolute;
+    top: 100%; /* Positionne juste en dessous de la barre de recherche */
+    left: 0;
+    right: 0;
+    background-color: #fff; /* Fond blanc pour contraste */
+    border: 1px solid #ddd; /* Bordure légère */
+    border-radius: 0 0 5px 5px; /* Coins arrondis en bas */
+    max-height: 200px; /* Hauteur maximale avec défilement */
+    overflow-y: auto; /* Défilement vertical si nécessaire */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1000; /* Au-dessus des autres éléments */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+.search-results li {
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #333; /* Texte sombre pour lisibilité */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transition fluide */
+}
+
+.search-results li:hover {
+    background-color: #f5f5f5; /* Gris clair au survol */
+}
+
+/* Styles existants pour la barre latérale */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: darkslategray;
+    overflow-x: hidden;
+    transition: width 0.3s ease-in-out;
+    padding-top: 60px;
+    z-index: 1000;
+}
+
+a{
+    text-decoration: none;
+}
+
+.sidebar.open {
+    width: 20%;
+}
+
+.sidebar a {
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.sidebar a:hover {
+    background-color: #575757;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.gauche #home {
+    margin-left: 15px;
+    font-size: 30px;
+    color: #fff;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.gauche #home:hover {
+    background-color: #575757;
+}
+
+.title:hover {
+    cursor: pointer;
+}

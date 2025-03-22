@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{admin/admin-layout :: adminLayout}">
+<head>
+    <title>Customers</title>
+    <!-- Bootstrap est déjà inclus dans votre layout -->
+</head>
+<body>
+	<div th:fragment="content">
+
+		<div class="container mt-4">
+        <h1 class="mb-4">Customers List</h1>
+        <a th:href="@{/admin/customers/add}" class="btn btn-primary mb-3">Add New Customer</a>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Total Purchases</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="customer : ${customers}">
+                    <td th:text="${customer.id}"></td>
+                    <td th:text="${customer.name}"></td>
+                    <td th:text="${customer.address != null ? customer.address : 'N/A'}"></td>
+                    <td th:text="${customer.phone != null ? customer.phone : 'N/A'}"></td>
+                    <td th:text="${customer.purchaseTotal}"></td>
+                    <td>
+                        <a th:href="@{/admin/customers/edit/{id}(id=${customer.id})}" class="btn btn-sm btn-warning">Edit</a>
+                        <form th:action="@{/admin/customers/delete/{id}(id=${customer.id})}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this customer?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+		
+	</div>
+</body>
+</html>

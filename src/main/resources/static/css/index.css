@@ -1,0 +1,135 @@
+/* Conteneur principal */
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-top: 70px;
+    gap: 20px;
+}
+
+/* Carte produit */
+.product-card {
+    width: 30%; /* Ajusté pour 4 colonnes avec gap */
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Image produit */
+.product-image {
+    width: 70%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Input quantité */
+.qte {
+    height: 30px;
+    width: 60px;
+    padding: 5px;
+    border: none;
+    border-bottom: 2px solid #e74c3c;
+    outline: none;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* En-tête et pied de la carte */
+.head, .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+}
+
+/* Disponibilité */
+.dispo {
+    color: #27ae60;
+    font-size: 14px;
+}
+
+.indispo {
+    color: #c0392b;
+    font-size: 14px;
+}
+
+/* Prix */
+.price {
+    font-weight: bold;
+    color: #2ecc71;
+    font-size: 18px;
+}
+
+/* Icônes */
+.icons {
+    display: flex;
+    gap: 10px;
+    font-size: 18px;
+    color: #d35400;
+}
+
+.icons i {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.icons i:hover {
+    color: #e74c3c;
+}
+
+/* Bouton */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #2c3e50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 3px 6px 0 #7f8c8d;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    box-shadow: 2px 3px 0 #7f8c8d;
+    transform: translateY(2px);
+}
+
+button:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+#closeSidebar{
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .product-card {
+        width: 31%; /* 3 colonnes sur tablettes */
+    }
+}
+
+@media (max-width: 768px) {
+    .product-card {
+        width: 48%; /* 2 colonnes sur écrans moyens */
+    }
+}
+
+@media (max-width: 480px) {
+    .product-card {
+        width: 100%; /* 1 colonne sur mobiles */
+    }
+}

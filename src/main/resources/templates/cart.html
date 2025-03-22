@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{layout :: layout}">
+    <div th:fragment="content">
+        <div class="container mt-4">
+            <h2>Votre Panier</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Produit</th>
+                        <th>Prix unitaire</th>
+                        <th>Quantité</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item, iter : ${cartItems}">
+                        <td>
+                            <img th:if="${item.product.image}" th:src="${item.product.image}" alt="Image produit" class="img-thumbnail" style="width: 50px; height: 50px;" />
+                            <span th:unless="${item.product.image}" class="text-muted">Aucune image</span>
+                        </td>
+                        <td th:text="${item.product.productName}"></td>
+                        <td th:text="${item.product.price + ' €'}"></td>
+                        <td th:text="${item.quantity}"></td>
+                        <td th:text="${item.product.price * item.quantity + ' €'}"></td>
+                        <td>
+                            <form th:action="@{/remove-from-cart}" method="post">
+                                <input type="hidden" name="index" th:value="${iter.index}">
+                                <button type="submit" class="btn btn-danger">Retirer</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Total: <span th:text="${total + ' €'}"></span></h3>
+
+            <div th:if="${not #lists.isEmpty(cartItems)}">
+                <h4>Informations de livraison</h4>
+                <form th:action="@{/checkout}" th:object="${customer}" method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Nom</label>
+                        <input type="text" class="form-control" th:field="*{name}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Téléphone</label>
+                        <input type="tel" class="form-control" th:field="*{phone}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Adresse</label>
+                        <textarea class="form-control" th:field="*{address}" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Confirmer l'achat</button>
+                    <a href="/" class="btn btn-secondary">Continuer les achats</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</html>

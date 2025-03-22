@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{admin/admin-layout :: adminLayout}">
+<head>
+    <title>Add/Edit Product</title>
+    <!-- Bootstrap est déjà inclus dans votre layout -->
+</head>
+<body>
+
+	<div th:fragment="content">
+
+		    <div class="container mt-5">
+        <h2 class="mb-4" th:text="${product.id != null} ? 'Edit Product' : 'Add Product'"></h2>
+        <form th:action="${product.id != null} ? @{/admin/products/edit/{id}(id=${product.id})} : @{/admin/products/add}" 
+              th:object="${product}" 
+              method="post" 
+              enctype="multipart/form-data" 
+              class="needs-validation" 
+              novalidate>
+            
+            <div class="mb-3">
+                <label for="productName" class="form-label">Product Name:</label>
+                <input type="text" id="productName" th:field="*{productName}" class="form-control" required />
+                <div class="invalid-feedback">Please enter the product name.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="price" class="form-label">Price:</label>
+                <input type="number" id="price" th:field="*{price}" class="form-control" step="0.01" required />
+                <div class="invalid-feedback">Please enter the price.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="stock" class="form-label">Stock:</label>
+                <input type="number" id="stock" th:field="*{stock}" class="form-control" required />
+                <div class="invalid-feedback">Please enter the stock quantity.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="size" class="form-label">Size:</label>
+                <input type="text" id="size" th:field="*{size}" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label for="color" class="form-label">Color:</label>
+                <input type="text" id="color" th:field="*{color}" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label for="categoryId" class="form-label">Category:</label>
+                <select id="categoryId" name="categoryId" class="form-select" required>
+                    <option value="">Select a category</option>
+                    <option th:each="category : ${categories}"
+                            th:value="${category.id}"
+                            th:text="${category.name}"
+                            th:selected="${product.category != null and product.category.id == category.id}"></option>
+                </select>
+                <div class="invalid-feedback">Please select a category.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="imageFile" class="form-label">Image:</label>
+                <input type="file" id="imageFile" name="imageFile" class="form-control" accept="image/*" />
+                <div th:if="${product.image != null}" class="mt-2">
+                    <p>Current Image:</p>
+                    <img th:src="${product.image}" alt="Product Image" class="img-thumbnail" style="width: 100px;" />
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success">Save Product</button>
+            <a th:href="@{/admin/products}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+		
+	</div>
+
+    <!-- Script pour la validation Bootstrap -->
+    <script>
+        (function () {
+            'use strict';
+            var forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+</body>
+</html>

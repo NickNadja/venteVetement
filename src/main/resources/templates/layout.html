@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title} ?: 'Boutique de vêtements'"></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="gauche">
+                <span class="title" id="openSidebar">☰</span>
+                <a class="navbar-brand" id="home" href="/"><i class="fa fa-home"></i> Home</a>
+            </div>
+            <div class="search-bar mx-auto">
+                <div class="input-group">
+                    <input type="text" placeholder="Rechercher...">
+                    <span><i class="fa fa-search"></i></span>
+                </div>
+            </div>
+            <div class="card-container">
+                <a href="/cart">
+                    <span class="cart-icon">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span th:text="${cartSize}" class="cart-count badge rounded-pill"></span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar avec Offcanvas Bootstrap -->
+    <div class="sidebar" id="sidebar">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="sidebarLabel">Menu</h5>
+            <span id="closeSidebar" class="btn-close" aria-label="Close"></span>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-tshirt me-2"></i>Tee-Shirt</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-socks me-2"></i>Pantalon</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-briefs me-2"></i>Short</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-shoe-prints me-2"></i>Chaussures</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <i class="fas fa-user me-2"></i>Login
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal Login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Connexion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Entrez votre email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <p>Pas de compte? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Inscrivez-vous</a></p>
+                    <button type="button" class="btn btn-primary">Se connecter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Inscription -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Inscription</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="regEmail" class="form-label">Emait</label>
+                            <input type="email" class="form-control" id="regEmail" placeholder="Entrez votre email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="regPassword" class="form-label">Mot de passe</label>
+                            <input type="password" class="form-control" id="regPassword" placeholder="Entrez votre mot de passe">
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirmer le mot de passe</label>
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirmez votre mot de passe">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">S'inscrire</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Zone pour le contenu spécifique -->
+    <div class="container">
+        <div th:insert="~{this :: content}"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const sidebar = document.getElementById("sidebar");
+        const openSidebar = document.getElementById("openSidebar");
+
+        openSidebar.addEventListener("click", function () {
+            if (sidebar.style.width === "20%") {
+                sidebar.style.width = "0"; // Ferme la sidebar
+            } else {
+                sidebar.style.width = "20%"; // Ouvre la sidebar
+            }
+        });
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        const sidebar = document.getElementById("sidebar");
+        const closeSidebar = document.getElementById("closeSidebar");
+
+        closeSidebar.addEventListener("click", function () {
+                sidebar.style.width = "0";
+        });
+    });
+</script>
+
+</body>
+</html>
