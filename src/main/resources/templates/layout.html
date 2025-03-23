@@ -41,16 +41,22 @@
         <div class="offcanvas-body">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-tshirt me-2"></i>Tee-Shirt</a>
+                    <a class="nav-link" href="/"><i class="fas fa-home me-2"></i>Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-socks me-2"></i>Pantalon</a>
+                    <a class="nav-link" th:href="@{/tees}"><i class="fas fa-tshirt me-2"></i>Tee-Shirts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-briefs me-2"></i>Short</a>
+                    <a class="nav-link" th:href="@{/pantalon}"><i class="fas fa-socks me-2"></i>Pantalon</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-shoe-prints me-2"></i>Chaussures</a>
+                    <a class="nav-link" th:href="@{/shorts}"><i class="fas fa-briefs me-2"></i>Short</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/chaussures}"><i class="fas fa-shoe-prints me-2"></i>Chaussures</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/manteaux}"><i class="fas fa-shoe-prints me-2"></i>Manteaux</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">

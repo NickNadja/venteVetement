@@ -46,19 +46,19 @@ public class ProductController {
 
     @PostMapping("/add")
     public String addProduct(@ModelAttribute Product product,
-                            @RequestParam("imageFile") MultipartFile imageFile,
-                            @RequestParam("categoryId") Long categoryId) throws IOException {
+                             @RequestParam("imageFile") MultipartFile imageFile,
+                             @RequestParam("categoryId") Long categoryId) throws IOException {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid category ID"));
         product.setCategory(category);
 
         if (!imageFile.isEmpty()) {
-            String uploadDir = "src/main/resources/static/images/";
+            String uploadDir = "uploads/";
             Files.createDirectories(Paths.get(uploadDir));
             String fileName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
             Path path = Paths.get(uploadDir + fileName);
             Files.write(path, imageFile.getBytes());
-            product.setImage("/images/" + fileName);
+            product.setImage("/uploads/" + fileName);
         }
 
         productRepository.save(product);
@@ -76,21 +76,21 @@ public class ProductController {
 
     @PostMapping("/edit/{id}")
     public String editProduct(@PathVariable Long id,
-                             @ModelAttribute Product product,
-                             @RequestParam("imageFile") MultipartFile imageFile,
-                             @RequestParam("categoryId") Long categoryId) throws IOException {
+                              @ModelAttribute Product product,
+                              @RequestParam("imageFile") MultipartFile imageFile,
+                              @RequestParam("categoryId") Long categoryId) throws IOException {
         product.setId(id);
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid category ID"));
         product.setCategory(category);
 
         if (!imageFile.isEmpty()) {
-            String uploadDir = "src/main/resources/static/images/";
+            String uploadDir = "uploads/";
             Files.createDirectories(Paths.get(uploadDir));
             String fileName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
             Path path = Paths.get(uploadDir + fileName);
             Files.write(path, imageFile.getBytes());
-            product.setImage("/images/" + fileName);
+            product.setImage("/uploads/" + fileName);
         } else {
             Product existingProduct = productRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Invalid product ID"));
