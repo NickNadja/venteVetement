@@ -133,7 +133,7 @@ public class ShopController {
         model.addAttribute("category", "Chaussures");
         return "tees";
     }
-        @GetMapping("/manteaux")
+    @GetMapping("/manteaux")
     public String showAdminManteaux(Model model) {
         Category manteauxCategory = categoryRepository.findByName("Manteaux");
         List<Product> manteaux = productRepository.findByProductNameContainingAndCategory("", manteauxCategory);
@@ -141,6 +141,33 @@ public class ShopController {
         model.addAttribute("products", manteaux);
         model.addAttribute("cartSize", cart.size());
         model.addAttribute("category", "Manteaux");
+        return "tees";
+    }
+
+
+    @GetMapping("/resultats")
+    public String resRech(Model model, 
+                       @RequestParam(value = "search", required = false) String search,
+                       @RequestParam(value = "category", required = false) String categoryName) {
+        List<Product> products;
+        String searchTerm = (search != null && !search.trim().isEmpty()) ? search.trim() : "";
+
+        if (!searchTerm.isEmpty()) {
+            // Recherche multi-champs
+            products = productRepository.searchProducts(searchTerm);
+        } else if (categoryName != null && !categoryName.trim().isEmpty()) {
+            // Filtrer par catégorie si pas de recherche
+            Category category = categoryRepository.findByName(categoryName.trim());
+            products = productRepository.findByProductNameContainingAndCategory("", category);
+        } else {
+            // Afficher tous les produits si aucun critère
+            products = productRepository.findAll();
+        }
+        
+        model.addAttribute("products", products);
+        model.addAttribute("cartSize", cart.size());
+        model.addAttribute("search", searchTerm);
+        model.addAttribute("category", categoryName);
         return "tees";
     }
 }
